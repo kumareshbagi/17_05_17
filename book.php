@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
+
 	<title>Book</title>
-	<body class="pink">
+	<body>
 	<h1>BOOK TICKET</h1>
 	<?php 
 	// Start the session
    session_start();
-	require('conn.php');//connect to config file
-	$userid= $_SESSION["ID"] ;
-	$eventid=$_SESSION["EID"];
-	$sql1 = "SELECT * FROM EVENTS WHERE ID = '$eventid' ";
+	include_once('conn.php');//connect to config file
+		$var=$_SESSION["EID"];
+         //echo $var;
+		//$eventid=$_SESSION['EID'];
+	 $userid=$_SESSION["ID"] ;
+	
+		//echo $userid;
+		//echo $eventid;
+		
+	$sql1 = "SELECT * FROM EVENTS WHERE EID = '$var' ";
       $result = $conn->query($sql1);
        while($array=mysqli_fetch_array($result))
          {
@@ -46,13 +52,21 @@
 		
 		<div class="row margin">
           <div class="input-field col s6">
-            <input id="ticket" type="text" name="ticket">
-            <label for="ticket" class="center-align">Number Of Tickets:</label>
+			  Enter Number Of Tickets:<select name="seat" >  
+
+    <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+     <option value="5">5</option>
+</select><input type="submit" name="submit" value="Submit" />
+            <!--<input id="ticket" type="number" name="ticket"/>
+            <label for="ticket" class="center-align">Number Of Tickets:</label> -->
           </div>
         </div>
 		
         <br />
-            <input type="submit" name="submit" value="Submit" />
+            
 		  </form>
 	</div>
  </div>
@@ -60,16 +74,25 @@
 	<?php 
 	echo "Summary:";
 	echo "<br />";
+		include_once('conn.php');
 	if (isset($_POST['submit'])) {
-	$tnum=$_POST['ticket'];
+	$tnum=$_POST['seat'];
 	$Total = $price * $tnum;
-	$sql = mysqli_query($conn,"INSERT INTO BOOKING (event_id,user_id,no_tickets,total_price) VALUES ($eventid,$userid,$tnum,$Total)");
-$sql = mysqli_query($conn,"UPDATE event_details SET Seats=Seats-$tnum where event_id=$eventid");
+	$sql = mysqli_query($conn,"INSERT INTO BOOKING (ID,EID,NOOFTICKETS,PRICE) VALUES ($userid,$var,$tnum,$Total)");
+$sql = mysqli_query($conn,"UPDATE EVENTS SET NOOFSEATS=NOOFSEATS-$tnum WHERE EID=$var");
+		echo "Hey congratulations!<br />";
+		 echo $uname;
+		echo "<br />";
 	echo "Yor tickets are reserved.Thank you for Booking!<br />";
-	echo "Total Price is";
+	echo "Total Price is: ";
 	echo $Total;
 		}
 	
 	?>
+		<br>
+		<br>
+		<br>
+		<br>
+		<a href="logout.php">logout</a>
 </body>
 </html>

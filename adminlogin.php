@@ -39,11 +39,12 @@ else {
     <td>EVENT ORAGNIZER:</td>
     <td><input type="text" name="eorg"/></td>
         </tr>
-    <tr>
+    
    <tr>
         <td>EVENT DESCRIPTION:</td>
         <td><input type="text"  name="edesc"/></td>
         </tr>
+			<tr>
         <td>EVENT VENUE:</td>
         <td><input type="text"  name="evenue"/></td>
         </tr>

@@ -70,6 +70,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<li><a href="#events" class="scroll">Events</a></li>
 										<li><a href="#mail" class="scroll">Mail Us</a></li>
 										<a href="admin.php">Admin</a>
+										<br>
+										<a href="login.php?Loginid=1">login</a>
 									</ul>
 								</nav>
 							</div>

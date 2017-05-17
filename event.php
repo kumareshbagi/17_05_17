@@ -31,14 +31,16 @@
             </nav>
         </div>
          <?php
+		                    session_start();
                             include_once('conn.php');
                             $id=$_GET['id'];
                             //echo $id;
+	                         $_SESSION["EID"]=$id;
                             $sql1 = "SELECT * FROM EVENTS WHERE EID='$id' ";
                             $result = $conn->query($sql1);
                               while($array=mysqli_fetch_row($result))
                              {
-                                // $var=$array[0];
+                                //$var=$array[0];
                                
                             ?>
         <main class="mdl-layout__content">
@@ -50,8 +52,9 @@
                     <div class="mdl-card__media">
                         <img class="article-image" <?php echo "src=$array[11]"; ?> border="0" alt="">
                     </div>
-                    <div class="mdl-card__supporting-text"
+                    <div class="mdl-card__supporting-text">
                     </div>
+					
                     <div class="mdl-grid portfolio-copy">
                         <h3 class="mdl-cell mdl-cell--12-col mdl-typography--headline">Event Description</h3>
                         <div class="mdl-cell mdl-cell--6-col mdl-card__supporting-text no-padding">
@@ -63,9 +66,9 @@
                                <?php echo $array[14]; ?>
                             </p>
         <p>
-            The oragnization That is going to Host Event is  <?php echo $array[2]; ?> <br/>
-            The Event is going to start on  <mark><?php echo $array[5]; ?> <br/></mark>
-            So please hurry up before it ends on <mark>  <?php echo $array[6]; ?><br/></mark>
+            The oragnization That is going to Host Event is : <?php echo $array[2]; ?> <br/>
+            The Event is going to start on :  <?php echo $array[5]; ?> <br/>
+            So please hurry up before it ends on :  <?php echo $array[6]; ?><br/>
             Tickets to the events sell out just about as fast as they go on sale. General admission early bird and advance tickets are available for purchase, and at a lower price, but these sell out quickly.
             So the ticket price for  <b><?php echo $array[1]; ?></b> Event is Rs. <?php echo $array[8]; ?><br/>
             The Venue of <b><?php echo $array[1]; ?></b> Event is: <b><?php echo $array[4]; ?></b>
@@ -78,7 +81,7 @@
            Or Contact The Event Person:<b><?php echo $array[9]; ?></b>
  
            <p>Register here to Book Tickets</p>
-		   <a href="login.php? id=<?php echo $array[0]; ?>">BookTicket</a>
+		   <a href="login.php">BookTicket</a>
       </div>
         </div>
     </div>
@@ -86,8 +89,8 @@
       
                                     <p>
                                     The Terms and Conditions for this Event is:
-                                    <mark>    <?php echo $array[12];?>
-                                        </mark>
+                                        <?php echo $array[12];?>
+                                        
                                     </p>
                        
                       
@@ -98,17 +101,7 @@
              <?php }
 $conn->close();
     ?>
-            <footer class="mdl-mini-footer">
-                <div class="mdl-mini-footer__left-section">
-                    <div class="mdl-logo">Enjoy Club</div>
-                </div>
-                <div class="mdl-mini-footer__right-section">
-                    <ul class="mdl-mini-footer__link-list">
-                        <li><a href="#">Help</a></li>
-                        <li><a href="#">Privacy & Terms</a></li>
-                    </ul>
-                </div>
-            </footer>
+            
                 </div>
             </div>
         </main>
